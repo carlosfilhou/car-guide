@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         brightness: Brightness.light,
-        scaffoldBackgroundColor: Color.fromARGB(255, 247, 235, 202),
+        scaffoldBackgroundColor: Color.fromARGB(255, 243, 227, 184),
       ),
       home: LoginPage(),
     );

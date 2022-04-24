@@ -8,10 +8,22 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Guia Floripa'),
-      ),
+      appBar: _appBar(),
       body: _body(),
+    );
+  }
+
+  _appBar() {
+    return AppBar(
+      titleTextStyle: TextStyle(
+        fontFamily: 'georgia',
+        fontStyle: FontStyle.italic,
+        fontWeight: FontWeight.bold,
+        fontSize: 25,
+      ),
+      title: Text(
+        'Guia Floripa',
+      ),
     );
   }
 
@@ -28,7 +40,7 @@ class LoginPage extends StatelessWidget {
               labelText: 'Login',
               hintText: 'Digite seu login',
               hintStyle: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
           ),
@@ -41,7 +53,7 @@ class LoginPage extends StatelessWidget {
               labelText: 'Senha',
               hintText: 'Digite sua senha',
               hintStyle: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
           ),
