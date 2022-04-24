@@ -32,47 +32,45 @@ class LoginPage extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: ListView(
         children: [
-          TextFormField(
-            style: TextStyle(
-              fontSize: 23,
-            ),
-            decoration: InputDecoration(
-              labelText: 'Login',
-              hintText: 'Digite seu login',
-              hintStyle: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
+          _textForm('login', 'Digite seu login'),
           SizedBox(height: 20),
-          TextFormField(
-            style: TextStyle(
-              fontSize: 23,
-            ),
-            decoration: InputDecoration(
-              labelText: 'Senha',
-              hintText: 'Digite sua senha',
-              hintStyle: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
+          _textForm('Senha', 'Digite sua senha', password: true),
           SizedBox(height: 20),
-          Container(
-            height: 46,
-            child: RaisedButton(
-              color: Colors.indigo,
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                ),
-              ),
-              onPressed: () {},
-            ),
-          )
+          _button('Login')
         ],
+      ),
+    );
+  }
+
+  _button(String text) {
+    return Container(
+      height: 46,
+      child: RaisedButton(
+        color: Colors.indigo,
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+          ),
+        ),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  _textForm(String label, String hint, {bool password = false}) {
+    return TextFormField(
+      obscureText: password,
+      style: TextStyle(
+        fontSize: 23,
+      ),
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
+        hintStyle: TextStyle(
+          fontSize: 16,
+        ),
       ),
     );
   }
