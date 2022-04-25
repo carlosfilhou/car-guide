@@ -1,5 +1,9 @@
 // ignore_for_file: prefer_const_constructors, deprecated_member_use
 
+import 'package:city_guide/components/TextFieldContainer.dart';
+import 'package:city_guide/components/already_have_an_account.dart';
+import 'package:city_guide/components/rounded_input_field.dart';
+import 'package:city_guide/components/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -7,23 +11,9 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: _appBar(),
       body: _body(),
-    );
-  }
-
-  _appBar() {
-    return AppBar(
-      titleTextStyle: TextStyle(
-        fontFamily: 'georgia',
-        fontStyle: FontStyle.italic,
-        fontWeight: FontWeight.bold,
-        fontSize: 25,
-      ),
-      title: Text(
-        'Guia Floripa',
-      ),
     );
   }
 
@@ -32,29 +22,50 @@ class LoginPage extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: ListView(
         children: [
-          _textForm('login', 'Digite seu login'),
+          _description(),
+          SizedBox(height: 30),
+          _title('Guia Floripa'),
+          SizedBox(height: 30),
+          RoundedInputField(
+            hintText: 'Seu email',
+            onChanged: (value) {},
+          ),
           SizedBox(height: 20),
-          _textForm('Senha', 'Digite sua senha', password: true),
-          SizedBox(height: 20),
-          _button('Login')
+          RoundedPasswordField(
+            onChanged: (value) {},
+          ),
+          SizedBox(height: 30),
+          _button('LOGIN', Colors.indigo, Colors.white),
+          SizedBox(height: 50),
+          AlreadyHaveAnAccountCheck()
         ],
       ),
     );
   }
 
-  _button(String text) {
+  _description() {
     return Container(
-      height: 46,
-      child: RaisedButton(
-        color: Colors.indigo,
+      alignment: Alignment.center,
+      child: Text(
+        'LOGIN',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
+
+  _button(String text, color, colorText) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(29),
+      child: FlatButton(
+        color: color,
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+        onPressed: () {},
         child: Text(
           text,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 22,
-          ),
+          style: TextStyle(color: colorText),
         ),
-        onPressed: () {},
       ),
     );
   }
@@ -63,7 +74,7 @@ class LoginPage extends StatelessWidget {
     return TextFormField(
       obscureText: password,
       style: TextStyle(
-        fontSize: 23,
+        fontSize: 18,
       ),
       decoration: InputDecoration(
         labelText: label,
@@ -71,6 +82,21 @@ class LoginPage extends StatelessWidget {
         hintStyle: TextStyle(
           fontSize: 16,
         ),
+      ),
+    );
+  }
+
+  _title(title) {
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        title,
+        style: TextStyle(
+            color: Colors.indigo,
+            fontFamily: 'georgia',
+            fontStyle: FontStyle.italic,
+            fontWeight: FontWeight.bold,
+            fontSize: 40),
       ),
     );
   }
