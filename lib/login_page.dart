@@ -2,12 +2,13 @@
 
 import 'package:city_guide/components/TextFieldContainer.dart';
 import 'package:city_guide/components/already_have_an_account.dart';
-import 'package:city_guide/components/rounded_input_field.dart';
-import 'package:city_guide/components/rounded_password_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  final _tLogin = TextEditingController();
+
+  IconData? iconV;
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +27,43 @@ class LoginPage extends StatelessWidget {
           SizedBox(height: 30),
           _title('Guia Floripa'),
           SizedBox(height: 30),
-          RoundedInputField(
-            hintText: 'Seu email',
-            onChanged: (value) {},
-          ),
+          _textForm('Seu email'),
           SizedBox(height: 20),
-          RoundedPasswordField(
-            onChanged: (value) {},
-          ),
+          _textForm('Sua Senha',
+              password: true, icon: Icons.lock, iconV: Icons.visibility),
           SizedBox(height: 30),
-          _button('LOGIN', Colors.indigo, Colors.white),
+          _button('LOGIN', Colors.indigo, Colors.white, _onClickLogin),
           SizedBox(height: 50),
           AlreadyHaveAnAccountCheck()
         ],
+      ),
+    );
+  }
+
+  _textForm(String hint,
+      {bool password = false,
+      TextEditingController? controller,
+      icon = Icons.person,
+      iconV}) {
+    return TextFieldContainer(
+      child: TextField(
+        controller: controller,
+        obscureText: password,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          icon: Icon(
+            icon,
+            color: Colors.indigo,
+          ),
+          suffixIcon: Icon(
+            iconV,
+            color: Colors.indigo,
+          ),
+          hintText: hint,
+          hintStyle: TextStyle(
+            fontSize: 16,
+          ),
+        ),
       ),
     );
   }
@@ -55,7 +80,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _button(String text, color, colorText) {
+  _button(String text, color, colorText, Function onPressed) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(29),
       child: FlatButton(
@@ -65,22 +90,6 @@ class LoginPage extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(color: colorText),
-        ),
-      ),
-    );
-  }
-
-  _textForm(String label, String hint, {bool password = false}) {
-    return TextFormField(
-      obscureText: password,
-      style: TextStyle(
-        fontSize: 18,
-      ),
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-        hintStyle: TextStyle(
-          fontSize: 16,
         ),
       ),
     );
@@ -99,5 +108,11 @@ class LoginPage extends StatelessWidget {
             fontSize: 40),
       ),
     );
+  }
+
+  _onClickLogin() {
+    String login = _tLogin.text;
+
+    print('Login:');
   }
 }
