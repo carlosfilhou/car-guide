@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
   final _tLogin = TextEditingController();
+  final _tSenha = TextEditingController();
 
   IconData? iconV;
   LoginPage({Key? key}) : super(key: key);
@@ -23,16 +24,20 @@ class LoginPage extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: ListView(
         children: [
+          SizedBox(height: 30),
           _description(),
           SizedBox(height: 30),
           _title('Guia Floripa'),
           SizedBox(height: 30),
-          _textForm('Seu email'),
+          _textForm('Seu email', controller: _tLogin),
           SizedBox(height: 20),
           _textForm('Sua Senha',
-              password: true, icon: Icons.lock, iconV: Icons.visibility),
+              controller: _tSenha,
+              password: true,
+              icon: Icons.lock,
+              iconV: Icons.visibility),
           SizedBox(height: 30),
-          _button('LOGIN', Colors.indigo, Colors.white, _onClickLogin),
+          _buttonLogin('LOGIN', Colors.indigo, Colors.white),
           SizedBox(height: 50),
           AlreadyHaveAnAccountCheck()
         ],
@@ -80,13 +85,18 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _button(String text, color, colorText, Function onPressed) {
+  _buttonLogin(String text, color, colorText) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(29),
       child: FlatButton(
         color: color,
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-        onPressed: () {},
+        onPressed: () {
+          String login = _tLogin.text;
+          String senha = _tSenha.text;
+
+          print('login: $login e senha: $senha');
+        },
         child: Text(
           text,
           style: TextStyle(color: colorText),
@@ -108,11 +118,5 @@ class LoginPage extends StatelessWidget {
             fontSize: 40),
       ),
     );
-  }
-
-  _onClickLogin() {
-    String login = _tLogin.text;
-
-    print('Login:');
   }
 }
