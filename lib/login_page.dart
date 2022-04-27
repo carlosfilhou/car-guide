@@ -9,6 +9,8 @@ class LoginPage extends StatelessWidget {
   final _tSenha = TextEditingController();
 
   IconData? iconV;
+
+  final _formKey = GlobalKey<FormState>();
   LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -20,40 +22,72 @@ class LoginPage extends StatelessWidget {
   }
 
   _body() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: ListView(
-        children: [
-          SizedBox(height: 30),
-          _description(),
-          SizedBox(height: 30),
-          _title('Guia Floripa'),
-          SizedBox(height: 30),
-          _textForm('Seu email', controller: _tLogin),
-          SizedBox(height: 20),
-          _textForm('Sua Senha',
+    return Form(
+      key: _formKey,
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: ListView(
+          children: [
+            SizedBox(height: 30),
+            _description(),
+            SizedBox(height: 30),
+            _title('Guia Floripa'),
+            SizedBox(height: 30),
+            _textForm(
+              'Seu email',
+              controller: _tLogin,
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              validator: (String? text) {
+                if (text!.isEmpty) {
+                  return 'Login incorreto';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 20),
+            _textForm(
+              'Sua Senha',
               controller: _tSenha,
               password: true,
               icon: Icons.lock,
-              iconV: Icons.visibility),
-          SizedBox(height: 30),
-          _buttonLogin('LOGIN', Colors.indigo, Colors.white),
-          SizedBox(height: 50),
-          AlreadyHaveAnAccountCheck()
-        ],
+              iconV: Icons.visibility,
+              keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.next,
+              validator: (String? text) {
+                if (text!.isEmpty) {
+                  return 'Senha incorreta';
+                }
+                return null;
+              },
+            ),
+            SizedBox(height: 30),
+            _buttonLogin('LOGIN', Colors.indigo, Colors.white),
+            SizedBox(height: 50),
+            AlreadyHaveAnAccountCheck()
+          ],
+        ),
       ),
     );
   }
 
-  _textForm(String hint,
-      {bool password = false,
-      TextEditingController? controller,
-      icon = Icons.person,
-      iconV}) {
+  _textForm(
+    String hint, {
+    bool password = false,
+    TextEditingController? controller,
+    FormFieldValidator<String>? validator,
+    icon = Icons.person,
+    iconV,
+    TextInputType? keyboardType,
+    TextInputAction? textInputAction,
+  }) {
     return TextFieldContainer(
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         obscureText: password,
+        validator: validator,
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
         decoration: InputDecoration(
           border: InputBorder.none,
           icon: Icon(
@@ -73,18 +107,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _description() {
-    return Container(
-      alignment: Alignment.center,
-      child: Text(
-        'LOGIN',
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
-  }
-
   _buttonLogin(String text, color, colorText) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(29),
@@ -92,6 +114,11 @@ class LoginPage extends StatelessWidget {
         color: color,
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
         onPressed: () {
+          bool formOk = _formKey.currentState!.validate();
+          if (!formOk) {
+            return;
+          }
+
           String login = _tLogin.text;
           String senha = _tSenha.text;
 
@@ -100,6 +127,18 @@ class LoginPage extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(color: colorText),
+        ),
+      ),
+    );
+  }
+
+  _description() {
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        'LOGIN',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
