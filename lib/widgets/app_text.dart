@@ -6,7 +6,7 @@ class AppText extends StatelessWidget {
   bool password;
   TextEditingController? controller;
   FormFieldValidator<String>? validator;
-  IconData icon = Icons.person;
+  IconData icon;
   IconData? iconV;
   TextInputType? keyboardType;
   TextInputAction? textInputAction;
@@ -15,7 +15,7 @@ class AppText extends StatelessWidget {
       {this.password = false,
       this.controller,
       this.validator,
-      required this.icon,
+      this.icon  = Icons.person,
       this.iconV,
       this.keyboardType,
       this.textInputAction});

@@ -40,10 +40,10 @@ class LoginPage extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 validator: (String? text) {
               if (text!.isEmpty) {
-                return 'Login incorreto';
+                return 'Senha incorreta';
               }
               return null;
-            }, icon: Icons.person, password: false),
+            }),
             SizedBox(height: 20),
             AppText('Sua Senha',
                 controller: _tSenha,
@@ -67,6 +67,9 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+
+
+  
 
   _button(String text, color, colorText) {
     return ClipRRect(
@@ -101,9 +104,7 @@ class LoginPage extends StatelessWidget {
     iconV,
     TextInputType? keyboardType,
     TextInputAction? textInputAction,
-  }) {
-    
-  }
+  }) {}
 
   _description() {
     return Container(
