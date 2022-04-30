@@ -13,6 +13,7 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
       children: [
         Text(
           login ? 'Não tem uma conta ? ' : 'Ja tem uma conta ? ',
+          // ignore: prefer_const_constructors
           style: TextStyle(
             color: Colors.indigo,
             fontSize: 15,
@@ -22,6 +23,7 @@ class AlreadyHaveAnAccountCheck extends StatelessWidget {
           onTap: () {},
           child: Text(
             login ? 'Inscreva-se' : 'Entrar',
+            // ignore: prefer_const_constructors
             style: TextStyle(
               color: Colors.indigo,
               fontWeight: FontWeight.bold,

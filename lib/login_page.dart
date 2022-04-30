@@ -1,12 +1,12 @@
-// ignore_for_file: prefer_const_constructors, deprecated_member_use
+// ignore_for_file: prefer_const_constructors, deprecated_member_use, avoid_print, must_be_immutable
 
 import 'package:city_guide/components/TextFieldContainer.dart';
 import 'package:city_guide/components/already_have_an_account.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  final _tLogin = TextEditingController();
-  final _tSenha = TextEditingController();
+  final _tLogin = TextEditingController(text: 'carlosfilho.canal@icloud.com');
+  final _tSenha = TextEditingController(text: '1234');
 
   IconData? iconV;
 
@@ -33,39 +33,59 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 30),
             _title('Guia Floripa'),
             SizedBox(height: 30),
-            _textForm(
-              'Seu email',
-              controller: _tLogin,
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              validator: (String? text) {
-                if (text!.isEmpty) {
-                  return 'Login incorreto';
-                }
-                return null;
-              },
-            ),
+            _textForm('Seu email',
+                controller: _tLogin,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+                validator: (String? text) {
+              if (text!.isEmpty) {
+                return 'Login incorreto';
+              }
+              return null;
+            }),
             SizedBox(height: 20),
-            _textForm(
-              'Sua Senha',
-              controller: _tSenha,
-              password: true,
-              icon: Icons.lock,
-              iconV: Icons.visibility,
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.next,
-              validator: (String? text) {
-                if (text!.isEmpty) {
-                  return 'Senha incorreta';
-                }
-                return null;
-              },
-            ),
+            _textForm('Sua Senha',
+                controller: _tSenha,
+                password: true,
+                icon: Icons.lock,
+                iconV: Icons.visibility,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                validator: (String? text) {
+              if (text!.isEmpty) {
+                return 'Senha incorreta';
+              }
+              return null;
+            }),
             SizedBox(height: 30),
-            _buttonLogin('LOGIN', Colors.indigo, Colors.white),
+            _button('LOGIN', Colors.indigo, Colors.white),
             SizedBox(height: 50),
             AlreadyHaveAnAccountCheck()
           ],
+        ),
+      ),
+    );
+  }
+
+  _button(String text, color, colorText) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(29),
+      child: FlatButton(
+        color: color,
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+        onPressed: () {
+          if (!_formKey.currentState!.validate()) {
+            return;
+          }
+
+          String login = _tLogin.text;
+          String senha = _tSenha.text;
+
+          print('login: $login e senha: $senha');
+        },
+        child: Text(
+          text,
+          style: TextStyle(color: colorText),
         ),
       ),
     );
@@ -102,31 +122,6 @@ class LoginPage extends StatelessWidget {
           hintStyle: TextStyle(
             fontSize: 16,
           ),
-        ),
-      ),
-    );
-  }
-
-  _buttonLogin(String text, color, colorText) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(29),
-      child: FlatButton(
-        color: color,
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-        onPressed: () {
-          bool formOk = _formKey.currentState!.validate();
-          if (!formOk) {
-            return;
-          }
-
-          String login = _tLogin.text;
-          String senha = _tSenha.text;
-
-          print('login: $login e senha: $senha');
-        },
-        child: Text(
-          text,
-          style: TextStyle(color: colorText),
         ),
       ),
     );
