@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
   final _tLogin = TextEditingController(text: 'carlosfilho.canal@icloud.com');
-  final _tSenha = TextEditingController(text: '1234');
+  final _tSenha = TextEditingController(text: '12345');
 
   IconData? iconV;
 
