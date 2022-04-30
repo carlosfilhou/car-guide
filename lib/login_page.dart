@@ -2,6 +2,7 @@
 
 import 'package:city_guide/components/TextFieldContainer.dart';
 import 'package:city_guide/components/already_have_an_account.dart';
+import 'package:city_guide/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -33,7 +34,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 30),
             _title('Guia Floripa'),
             SizedBox(height: 30),
-            _textForm('Seu email',
+            AppText('Seu email',
                 controller: _tLogin,
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
@@ -42,9 +43,9 @@ class LoginPage extends StatelessWidget {
                 return 'Login incorreto';
               }
               return null;
-            }),
+            }, icon: Icons.person, password: false),
             SizedBox(height: 20),
-            _textForm('Sua Senha',
+            AppText('Sua Senha',
                 controller: _tSenha,
                 password: true,
                 icon: Icons.lock,
@@ -101,30 +102,7 @@ class LoginPage extends StatelessWidget {
     TextInputType? keyboardType,
     TextInputAction? textInputAction,
   }) {
-    return TextFieldContainer(
-      child: TextFormField(
-        controller: controller,
-        obscureText: password,
-        validator: validator,
-        keyboardType: keyboardType,
-        textInputAction: textInputAction,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          icon: Icon(
-            icon,
-            color: Colors.indigo,
-          ),
-          suffixIcon: Icon(
-            iconV,
-            color: Colors.indigo,
-          ),
-          hintText: hint,
-          hintStyle: TextStyle(
-            fontSize: 16,
-          ),
-        ),
-      ),
-    );
+    
   }
 
   _description() {
