@@ -2,6 +2,8 @@
 
 import 'package:city_guide/components/TextFieldContainer.dart';
 import 'package:city_guide/components/already_have_an_account.dart';
+import 'package:city_guide/home_page.dart';
+import 'package:city_guide/utils/nav.dart';
 import 'package:city_guide/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,7 @@ class LoginPage extends StatelessWidget {
   IconData? iconV;
 
   final _formKey = GlobalKey<FormState>();
+
   LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -67,9 +70,6 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-
-
-  
 
   _button(String text, color, colorText) {
     return ClipRRect(
