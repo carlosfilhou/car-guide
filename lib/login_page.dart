@@ -15,17 +15,15 @@ class LoginPage extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  LoginPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: _body(),
+      body: _body(context),
     );
   }
 
-  _body() {
+  _body(context) {
     return Form(
       key: _formKey,
       child: Container(
@@ -62,7 +60,7 @@ class LoginPage extends StatelessWidget {
               return null;
             }),
             SizedBox(height: 30),
-            _button('LOGIN', Colors.indigo, Colors.white),
+            _button(context, 'LOGIN', Colors.indigo, Colors.white),
             SizedBox(height: 50),
             AlreadyHaveAnAccountCheck()
           ],
@@ -71,7 +69,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  _button(String text, color, colorText) {
+  _button(context, String text, color, colorText) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(29),
       child: FlatButton(
@@ -86,6 +84,10 @@ class LoginPage extends StatelessWidget {
           String senha = _tSenha.text;
 
           print('login: $login e senha: $senha');
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return HomePage();
+          }));
         },
         child: Text(
           text,
