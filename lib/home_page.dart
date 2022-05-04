@@ -9,6 +9,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleTextStyle: TextStyle(
+          fontFamily: 'georgia',
+          fontSize: 27,
+          fontStyle: FontStyle.italic,
+          fontWeight: FontWeight.bold,
+        ),
         title: Text('Guia Floripa'),
       ),
       body: _body(),

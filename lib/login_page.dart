@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
                 textInputAction: TextInputAction.next,
                 validator: (String? text) {
               if (text!.isEmpty) {
-                return 'Senha incorreta';
+                return 'Email incorreto';
               }
               return null;
             }),
@@ -85,9 +85,7 @@ class LoginPage extends StatelessWidget {
 
           print('login: $login e senha: $senha');
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HomePage();
-          }));
+          push(context, HomePage());
         },
         child: Text(
           text,
