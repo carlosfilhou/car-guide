@@ -3,6 +3,7 @@
 import 'package:city_guide/components/TextFieldContainer.dart';
 import 'package:city_guide/components/already_have_an_account.dart';
 import 'package:city_guide/home_page.dart';
+import 'package:city_guide/utils/login_api.dart';
 import 'package:city_guide/utils/nav.dart';
 import 'package:city_guide/widgets/app_text.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,7 @@ class LoginPage extends StatelessWidget {
       child: FlatButton(
         color: color,
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-        onPressed: () {
+        onPressed: () async {
           if (!_formKey.currentState!.validate()) {
             return;
           }
@@ -85,7 +86,13 @@ class LoginPage extends StatelessWidget {
 
           print('login: $login e senha: $senha');
 
-          push(context, HomePage());
+          bool? ok = await LoginApi.login(login, senha);
+
+          if (ok!) {
+            push(context, HomePage());
+          } else {
+            print('Login incorreto');
+          }
         },
         child: Text(
           text,
