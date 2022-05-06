@@ -3,14 +3,23 @@
 import 'package:city_guide/components/TextFieldContainer.dart';
 import 'package:city_guide/components/already_have_an_account.dart';
 import 'package:city_guide/home_page.dart';
+import 'package:city_guide/utils/alert.dart';
+import 'package:city_guide/utils/api_response.dart';
 import 'package:city_guide/utils/login_api.dart';
 import 'package:city_guide/utils/nav.dart';
+import 'package:city_guide/utils/users.dart';
 import 'package:city_guide/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  final _tLogin = TextEditingController(text: 'carlosfilho.canal@icloud.com');
-  final _tSenha = TextEditingController(text: '12345');
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _tLogin = TextEditingController(text: 'admin');
+
+  final _tSenha = TextEditingController(text: '123');
 
   IconData? iconV;
 
@@ -86,12 +95,14 @@ class LoginPage extends StatelessWidget {
 
           print('login: $login e senha: $senha');
 
-          bool? ok = await LoginApi.login(login, senha);
+          ApiResponse<Usuario>? user = await LoginApi.login(login, senha);
 
-          if (ok!) {
+          if (user != null) {
+
             push(context, HomePage());
           } else {
-            print('Login incorreto');
+            var response;
+            alertDialog(context, response.ok);
           }
         },
         child: Text(
