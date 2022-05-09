@@ -28,28 +28,56 @@ class HomePage extends StatelessWidget {
   _body() {
     List<Carro> carros = CarrosApi.getCarros();
 
-    return ListView.builder(
-      itemCount: carros.length,
-      itemBuilder: (context, index) {
-        Carro c = carros[index];
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: ListView.builder(
+        itemCount: carros.length,
+        itemBuilder: (context, index) {
+          Carro c = carros[index];
 
-        return Row(
-          children: [
-            Image.network(
-              c.urlFoto,
-              width: 150,
-            ),
-            Flexible(
-              child: Text(
-                c.nome,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 24),
+          return Card(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Image.network(
+                      c.urlFoto,
+                      width: 250,
+                    ),
+                  ),
+                  Text(
+                    c.nome,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  Text(
+                    'descrição...',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      TextButton(
+                        child: const Text('DETALHES'),
+                        onPressed: () {/* ... */},
+                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        child: const Text('SHARE'),
+                        onPressed: () {/* ... */},
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ],
               ),
-            )
-          ],
-        );
-      },
+            ),
+          );
+        },
+      ),
     );
   }
 }
