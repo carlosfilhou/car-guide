@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                 c.nome,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 25),
+                style: TextStyle(fontSize: 24),
               ),
             )
           ],
