@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
           fontStyle: FontStyle.italic,
           fontWeight: FontWeight.bold,
         ),
-        title: Text('Guia Floripa'),
+        title: Text('Guia Carros'),
       ),
       drawer: DrawerList(),
       body: _body(),

@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 30),
             _description(),
             SizedBox(height: 30),
-            _title('Guia Floripa'),
+            _title('Guia Carros'),
             SizedBox(height: 30),
             AppText('Seu email',
                 controller: _tLogin,
