@@ -25,6 +25,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool _showProgress = false;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -70,7 +72,16 @@ class _LoginPageState extends State<LoginPage> {
               return null;
             }),
             SizedBox(height: 30),
-            _button(context, 'LOGIN', Colors.indigo, Colors.white),
+            _showProgress
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : _button(
+                    context,
+                    'LOGIN',
+                    Colors.indigo,
+                    Colors.white,
+                  ),
             SizedBox(height: 50),
             AlreadyHaveAnAccountCheck()
           ],
@@ -95,15 +106,22 @@ class _LoginPageState extends State<LoginPage> {
 
           print('login: $login e senha: $senha');
 
+          setState(() {
+            _showProgress = true;
+          });
+
           ApiResponse<Usuario>? user = await LoginApi.login(login, senha);
 
           if (user != null) {
-
-            push(context, HomePage());
+            push(context, HomePage(), replace: true);
           } else {
             var response;
             alertDialog(context, response.ok);
           }
+
+          setState(() {
+            _showProgress = false;
+          });
         },
         child: Text(
           text,

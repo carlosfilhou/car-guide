@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:city_guide/carro.dart';
+import 'package:city_guide/drawer_list.dart';
+import 'package:city_guide/utils/carros_api.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,18 +20,23 @@ class HomePage extends StatelessWidget {
         ),
         title: Text('Guia Floripa'),
       ),
+      drawer: DrawerList(),
       body: _body(),
     );
   }
 
   _body() {
-    return Center(
-      child: Text(
-        'Carlos',
-        style: TextStyle(
-          fontSize: 22,
-        ),
-      ),
-    );
+    List<Carro> carros = CarrosApi.getCarros();
+
+    return ListView.builder(
+        itemCount: carros.length,
+        itemBuilder: (context, index) {
+          Carro c = carros[index];
+
+          return Text(
+            c.nome<String>,
+            style: TextStyle(fontSize: 22),
+          );
+        });
   }
 }
