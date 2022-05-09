@@ -29,14 +29,27 @@ class HomePage extends StatelessWidget {
     List<Carro> carros = CarrosApi.getCarros();
 
     return ListView.builder(
-        itemCount: carros.length,
-        itemBuilder: (context, index) {
-          Carro c = carros[index];
+      itemCount: carros.length,
+      itemBuilder: (context, index) {
+        Carro c = carros[index];
 
-          return Text(
-            c.nome<String>,
-            style: TextStyle(fontSize: 22),
-          );
-        });
+        return Row(
+          children: [
+            Image.network(
+              c.urlFoto,
+              width: 150,
+            ),
+            Flexible(
+              child: Text(
+                c.nome,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 25),
+              ),
+            )
+          ],
+        );
+      },
+    );
   }
 }

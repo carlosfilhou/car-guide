@@ -1,22 +1,22 @@
 class Carro {
-  int? id;
-  String? nome;
-  String? tipo;
-  String? descricao;
-  String? urlFoto;
-  String? urlVideo;
-  String? latitude;
-  String? longitude;
+  late int id;
+  late String nome;
+  late String tipo;
+  late String descricao;
+  late String urlFoto;
+  late String urlVideo;
+  late String latitude;
+  late String longitude;
 
   Carro({
-    this.id,
-    this.nome,
-    this.tipo,
-    this.descricao,
-    this.urlFoto,
-    this.urlVideo,
-    this.latitude,
-    this.longitude,
+    required this.id,
+    required this.nome,
+    required this.tipo,
+    required this.descricao,
+    required this.urlFoto,
+    required this.urlVideo,
+    required this.latitude,
+    required this.longitude,
   });
 
   Carro.fromJson(Map<String, dynamic> json) {
@@ -28,11 +28,10 @@ class Carro {
     urlVideo = json['urlVideo'];
     latitude = json['latitude'];
     longitude = json['longitude'];
-
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String,dynamic>();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['nome'] = this.nome;
     data['tipo'] = this.tipo;
