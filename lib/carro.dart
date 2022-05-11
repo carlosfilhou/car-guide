@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_collection_literals
+
 class Carro {
   late int id;
   late String nome;
@@ -23,15 +25,15 @@ class Carro {
     id = json['id'];
     nome = json['nome'];
     tipo = json['tipo'];
-    descricao = json['descrição'];
-    urlFoto = json['urlFoto'];
-    urlVideo = json['urlVideo'];
-    latitude = json['latitude'];
-    longitude = json['longitude'];
+    descricao = json['descricao'] ?? 'descricao...';
+    urlFoto = json['urlFoto'] ?? 'https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/MERCEDES_BENZ_AMG.png' ;
+    urlVideo = json['urlVideo'] ?? 'https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/mercedes.mp4';
+    latitude = json['latitude'] ?? "-23.564224";
+    longitude = json['longitude'] ?? "-46.653156";
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['id'] = this.id;
     data['nome'] = this.nome;
     data['tipo'] = this.tipo;

@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(fontSize: 24),
                   ),
                   Text(
-                    'descrição...',
+                    c.descricao,
                     style: TextStyle(fontSize: 16),
                   ),
                   Row(

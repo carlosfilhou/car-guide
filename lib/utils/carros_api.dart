@@ -1,49 +1,26 @@
+// ignore_for_file: deprecated_member_use, prefer_collection_literals, unused_local_variable
+
 import 'package:city_guide/carro.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CarrosApi {
   static Future<List<Carro>> getCarros() async {
+    var url =
+        Uri.parse('https://carros-springboot.herokuapp.com/api/v1/carros');
+
+    print('GET > $url');
+
+    var response = await http.get(url);
+
+    List list = json.decode(response.body);
+
     final carros = <Carro>[];
 
-    await Future.delayed(Duration(seconds: 2));
-
-    carros.add(Carro(
-      id: 13361,
-      nome: 'BMW M5',
-      tipo: 'esportivos',
-      descricao: 'Desc BMW M5',
-      urlFoto:
-          'https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/BMW.png',
-      urlVideo:
-          'https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/bmw-m5.mp4',
-      latitude: '-23.564224',
-      longitude: '-46.653156',
-    ));
-    carros.add(Carro(
-      id: 13371,
-      nome: 'Renault Megane RS Trophy',
-      tipo: 'esportivos',
-      descricao: 'Desc Renault Megane RS Trophy',
-      urlFoto:
-          'https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/Renault_Megane_Trophy.png',
-      urlVideo:
-          'https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/renault_megane.mp4',
-      latitude: '-23.564224',
-      longitude: '-46.653156',
-    ));
-    carros.add(Carro(
-      id: 13381,
-      nome: 'Maserati Grancabrio Sport',
-      tipo: 'esportivos',
-      descricao: 'Desc Maserati Grancabrio Sport',
-      urlFoto:
-          'https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/esportivos/Maserati_Grancabrio_Sport.png',
-      urlVideo:
-          'https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/classicos/cadillac_eldorado.mp4',
-      latitude: '-23.564224',
-      longitude: '-46.653156',
-    ));
+    for (Map<String, dynamic> map in list) {
+      Carro c = Carro.fromJson(map);
+      carros.add(c);
+    }
 
     return carros;
   }
