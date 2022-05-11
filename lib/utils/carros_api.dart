@@ -1,8 +1,12 @@
 import 'package:city_guide/carro.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CarrosApi {
-  static List<Carro> getCarros() {
+  static Future<List<Carro>> getCarros() async {
     final carros = <Carro>[];
+
+    await Future.delayed(Duration(seconds: 2));
 
     carros.add(Carro(
       id: 13361,
